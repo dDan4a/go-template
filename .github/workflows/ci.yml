@@ -1,0 +1,25 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    uses: dDan4a/ci/.github/workflows/go-lint.yml@v1
+  test:
+    uses: dDan4a/ci/.github/workflows/go-test.yml@v1
+  e2e:
+    uses: dDan4a/ci/.github/workflows/go-test-postgres.yml@v1
+    with:
+      tags: e2e
+  vulncheck:
+    uses: dDan4a/ci/.github/workflows/go-vulncheck.yml@v1
+  tidy:
+    uses: dDan4a/ci/.github/workflows/go-mod-tidy.yml@v1
+  hadolint:
+    uses: dDan4a/ci/.github/workflows/hadolint.yml@v1
